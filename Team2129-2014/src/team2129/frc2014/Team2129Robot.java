@@ -3,11 +3,12 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SimpleRobot;
+import edu.wpi.first.wpilibj.Timer;
 
 public final class Team2129Robot extends SimpleRobot {
     public RobotDrive robotdrive = new RobotDrive(Constants.leftDrivePWM,Constants.rightDrivePWM);
     public ArmControlSystem armCS = new ArmControlSystem();
-    public PullbackControlSystem pullCS = new PullbackControlSystem();
+    public PullbackControlSystem pullCS;
     public FireControlSystem fireCS = new FireControlSystem();
     public Joystick joystick1 = new Joystick(Constants.joy1ID);
     public Joystick joystick2 = new Joystick(Constants.joy2ID);
@@ -47,4 +48,18 @@ public final class Team2129Robot extends SimpleRobot {
             this.overrideCS.update();
         }
      }
+    
+    public void autonomous(){
+        if (this.isAutonomous()&&this.isEnabled()){
+            this.armCS.armMotor.setSafetyEnabled(false);
+            this.armCS.move(1);
+            Timer.delay(5);
+            this.armCS.move(0);
+            this.armCS.armMotor.setSafetyEnabled(true);
+            this.pullCS=new PullbackControlSystem();
+            while (this.isAutonomous()&&this.isEnabled()){
+                this.pullCS.update();
+            }
+        }
+    }
 }

@@ -15,23 +15,34 @@ public class OverrideControlSystem {
     }
     
     public void update(){ //6/7 8/9 10/11
-        if (this.robot.getButtonPressed( 6)){
-            this.robot.pullCS.pullbackMotor.set(-1);
-        }
-        if (this.robot.getButtonPressed( 7)){
-            this.robot.pullCS.pullbackMotor.set( 1);
-        }
-        if (this.robot.getButtonPressed( 8)){
-            this.robot.fireCS.releaseMotor .set(-1);
-        }
-        if (this.robot.getButtonPressed( 9)){
-            this.robot.fireCS.releaseMotor .set( 1);
-        }
-        if (this.robot.getButtonPressed(10)){
-            this.robot.armCS.armMotor      .set(-1);
-        }
-        if (this.robot.getButtonPressed(11)){
-            this.robot.armCS.armMotor      .set( 1);
+        if (this.robot.driverstation.getDigitalIn(1)){
+            if (this.robot.getButtonPressed( 6)){
+                this.robot.pullCS.pullbackMotor.set(-1);
+            }
+            else if (this.robot.getButtonPressed( 7)){
+                this.robot.pullCS.pullbackMotor.set( 1);
+            }
+            else{
+                this.robot.pullCS.pullbackMotor.set( 0);
+            }
+            if (this.robot.getButtonPressed( 8)){
+                this.robot.fireCS.releaseMotor .set(-1);
+            }
+            else if (this.robot.getButtonPressed( 9)){
+                this.robot.fireCS.releaseMotor .set( 1);
+            }
+            else{
+                this.robot.fireCS.releaseMotor .set( 0);
+            }
+            if (this.robot.getButtonPressed(10)){
+                this.robot.armCS.armMotor      .set(-1);
+            }
+            else if (this.robot.getButtonPressed(11)){
+                this.robot.armCS.armMotor      .set( 1);
+            }
+            else{
+                this.robot.armCS.armMotor      .set( 0);
+            }
         }
     }
 }

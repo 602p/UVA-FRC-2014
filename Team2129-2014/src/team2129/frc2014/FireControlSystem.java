@@ -33,10 +33,12 @@ public class FireControlSystem {
                 this.fireCS.releaseMotor.setSafetyEnabled(true);
                 this.fireCS.releaseMotor.set(0);
                 this.fireCS.state="DO_NOTHING";
+                this.fireCS.reWind();
             }
             this.fireCS.releaseMotor.setSafetyEnabled(true);
             this.fireCS.releaseMotor.set(0);
             this.fireCS.state="DO_NOTHING";
+            this.fireCS.reWind();
         }
         
     }
